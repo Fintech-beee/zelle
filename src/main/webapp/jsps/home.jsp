@@ -9,8 +9,8 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Zelle Payment Platform evolution automation project 2023.</h1>
-<h1 align="center">Zelle Evolution is a disruption project that is challenging statusquo in the epayment industry. We believe impossibility does exit.
+<h1 align="center">Welcome to Cash_app Payment Platform evolution automation project 2023.</h1>
+<h1 align="center">Cash_app Evolution is a disruption project that is challenging statusquo in the epayment industry. We believe impossibility does exit.
 	           We are raising to the demand of our generation in epayment automation.
 	We welcome you onboard as we explore and experience this change together.</h1>
 <hr>
