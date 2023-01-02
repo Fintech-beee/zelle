@@ -7,8 +7,8 @@
 	<packaging>war</packaging>
 	
 	<version>0.0.8</version> 
-	
-	<name>cash_app web-application</name>
+
+		<name>cash_app web-application</name>
 
 	<description>Maven Web Project for Java Project</description>
 
@@ -95,13 +95,17 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Releases Nexus Repository</name>
+
 	      <url>http://3.143.3.20:8181/mylandmarktech/repository/cash_app-releases/</url>
+
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Snapshot Nexus Repository </name>
+
 	      <url>http://3.143.3.20:8181/mylandmarktech/repository/cash_app-sanpshot/</url>
+	      
 	    </snapshotRepository>
 	    
 	</distributionManagement>
