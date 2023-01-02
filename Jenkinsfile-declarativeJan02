@@ -1,0 +1,70 @@
+pipeline{
+	agent any
+	tools{
+	maven "maven3.8.6"
+	}
+stages{
+	stage('1getcode'){
+	steps{
+	sh "echo 'cloning a new application version' "
+	git branch: 'dev', credentialsId: 'gitHubCredentials', url: 'https://github.com/Fintech-beee/cash_app.git'
+	}
+	}
+stage('2test&build'){
+		steps{
+		sh "echo 'running Junit test cases' "
+		sh "echo 'testing must pass to create artifacts' "
+		sh "mvn clean package"
+		} 
+	}
+	stage('3CodeQuality'){
+	steps{
+	sh "echo 'running CodeQalityAnalysis' "
+	sh "mvn sonar:sonar"
+		} 
+	}
+	stage('4upload2nexus'){
+	steps{
+	sh "echo 'deploying artifacts to nexus' "
+	sh "mvn deploy"
+		} 
+	}
+	stage('5deploy2Prod'){
+	steps{
+	sh "echo 'deploying build to productionTomcat' "
+	deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://18.188.171.200:8177/')], contextPath: null, war: 'target/*war'
+		} 
+	    }
+}
+	post{
+			always{
+					emailext body: '''Hello Team,
+	
+	Please review job status and revert asap.
+	
+	regards
+	
+	dupe''', recipientProviders: [developers(), buildUser(), upstreamDevelopers()], subject: 'Success', to: 'cash_app-team@gmail.com'
+
+			}
+			success{
+				emailext body: '''Hello Team,
+	
+	Job run successfully executed.
+	
+	regards
+	
+	dupe''', recipientProviders: [developers(), buildUser(), upstreamDevelopers()], subject: 'Success', to: 'cash_app-team@gmail.com'
+			}
+			failure{
+				emailext body: '''Hello Team,
+	
+	Job runfailed.Please review job status and revert asap.
+	
+	regards
+	
+	dupe''', recipientProviders: [developers(), buildUser(), upstreamDevelopers()], subject: 'Success', to: 'cash_app-team@gmail.com'
+			}
+		}
+}
+	
